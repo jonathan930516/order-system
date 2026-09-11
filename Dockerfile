@@ -8,7 +8,7 @@ COPY orderservlet.war /tmp/orderservlet.war
 RUN cd /usr/local/tomcat/webapps/ROOT && \
     jar -xf /tmp/orderservlet.war && \
     rm /tmp/orderservlet.war
-    RUN find /usr/local/tomcat/webapps/ROOT -maxdepth 2 -type f -print
+    COPY p1_2.html /usr/local/tomcat/webapps/ROOT/p1_2.html
 EXPOSE 8080
 
 CMD ["sh", "-c", "sed -i 's/port=\"8005\"/port=\"-1\"/' /usr/local/tomcat/conf/server.xml && catalina.sh run"]
