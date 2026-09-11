@@ -8,7 +8,7 @@ COPY orderservlet.war /tmp/orderservlet.war
 RUN cd /usr/local/tomcat/webapps/ROOT && \
     jar -xf /tmp/orderservlet.war && \
     rm /tmp/orderservlet.war
-
+    RUN find /usr/local/tomcat/webapps/ROOT -maxdepth 2 -type f -print
 EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
