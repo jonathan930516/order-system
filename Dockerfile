@@ -1,6 +1,13 @@
 FROM tomcat:10.1-jdk17-temurin
 
-COPY orderservlet.war /usr/local/tomcat/webapps/ROOT.war
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
+RUN mkdir -p /usr/local/tomcat/webapps/ROOT
+
+COPY orderservlet.war /tmp/orderservlet.war
+
+RUN cd /usr/local/tomcat/webapps/ROOT && \
+    jar -xf /tmp/orderservlet.war && \
+    rm /tmp/orderservlet.war
 
 EXPOSE 8080
 
