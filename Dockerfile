@@ -11,4 +11,4 @@ RUN cd /usr/local/tomcat/webapps/ROOT && \
     RUN find /usr/local/tomcat/webapps/ROOT -maxdepth 2 -type f -print
 EXPOSE 8080
 
-CMD ["catalina.sh", "run"]
+CMD ["sh", "-c", "sed -i 's/port=\"8005\"/port=\"-1\"/' /usr/local/tomcat/conf/server.xml && catalina.sh run"]
