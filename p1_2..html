@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TechStore 科技商城</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, "Microsoft JhengHei", sans-serif;
+    background: #f4f7fb;
+    color: #152238;
+}
+
+/* ===== 頂部導覽 ===== */
+
+header {
+    background: #07182a;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,.15);
+}
+
+.topbar {
+    max-width: 1400px;
+    margin: auto;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 0 30px;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #24c7ff;
+}
+
+.search {
+    flex: 1;
+    position: relative;
+}
+
+.search input {
+    width: 100%;
+    padding: 14px 55px 14px 18px;
+    border-radius: 10px;
+    border: 1px solid #37516d;
+    background: #132a42;
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+.search input:focus {
+    border-color: #23bfff;
+}
+
+.search button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 55px;
+    border: 0;
+    border-radius: 0 10px 10px 0;
+    background: #139cf4;
+    color: white;
+    cursor: pointer;
+    font-size: 19px;
+}
+
+.nav-right {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+}
+
+.nav-right span {
+    cursor: pointer;
+}
+
+/* ===== 次導覽 ===== */
+
+.subnav {
+    background: white;
+    border-bottom: 1px solid #e5eaf1;
+}
+
+.subnav-inner {
+    max-width: 1400px;
+    margin: auto;
+    padding: 0 30px;
+    display: flex;
+    gap: 35px;
+    height: 50px;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.subnav a {
+    text-decoration: none;
+    color: #334155;
+}
+
+.subnav a:hover {
+    color: #0a9cf5;
+}
+
+/* ===== 主內容 ===== */
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 24px 30px 50px;
+}
+
+/* ===== Banner ===== */
+
+.hero {
+    min-height: 330px;
+    border-radius: 22px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 80% 30%, rgba(69,86,255,.55), transparent 35%),
+        linear-gradient(120deg,#081c33,#123d67,#392b77);
+    color: white;
+    position: relative;
+    padding: 55px 65px;
+    box-shadow: 0 20px 50px rgba(16,42,67,.18);
+}
+
+.hero::after {
+    content: "TECH";
+    position: absolute;
+    right: 7%;
+    bottom: -40px;
+    font-size: 180px;
+    font-weight: 900;
+    color: rgba(255,255,255,.035);
+}
+
+.hero-label {
+    color: #3cd7ff;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: 50px;
+    margin: 15px 0 10px;
+}
+
+.hero p {
+    color: #d7e7f6;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.hero-btn {
+    margin-top: 20px;
+    display: inline-block;
+    background: #1bbcff;
+    color: #04192a;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.hero-btn:hover {
+    transform: translateY(-2px);
+    background: #48d0ff;
+}
+
+/* ===== 特色 ===== */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+    margin: 22px 0 38px;
+}
+
+.feature {
+    background: white;
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    border: 1px solid #e5ebf2;
+}
+
+.feature-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: #e7f7ff;
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+}
+
+.feature strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.feature small {
+    color: #708090;
+}
+
+/* ===== 標題 ===== */
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 18px;
+}
+
+.section-title h2 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.section-title span {
+    color: #7b8794;
+}
+
+/* ===== 商品 ===== */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px;
+    margin-bottom: 45px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    padding: 20px;
+    cursor: pointer;
+    transition: .25s;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(31,60,85,.12);
+}
+
+.product-card.active {
+    border-color: #16bfff;
+    box-shadow: 0 10px 30px rgba(22,191,255,.15);
+}
+
+.tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #ff4058;
+    color: white;
+    border-radius: 20px;
+    padding: 6px 11px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.product-img {
+    height: 150px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-size: 78px;
+    margin-bottom: 15px;
+    background: linear-gradient(145deg,#f5f8fb,#e7edf5);
+}
+
+.product-card h3 {
+    margin: 5px 0;
+}
+
+.desc {
+    color: #84909d;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.rating {
+    color: #ff9e00;
+    font-size: 14px;
+}
+
+.price {
+    font-size: 23px;
+    color: #09295c;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+.stock {
+    float: right;
+    color: #0aaa70;
+    font-size: 13px;
+}
+
+/* ===== 結帳 ===== */
+
+.checkout-area {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 25px;
+    align-items: start;
+}
+
+.checkout-info,
+.order-box {
+    background: white;
+    border-radius: 18px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 35px rgba(44,62,80,.06);
+}
+
+.checkout-info {
+    padding: 32px;
+}
+
+.checkout-info h2,
+.order-box h2 {
+    margin-top: 0;
+}
+
+.checkout-info p {
+    line-height: 1.8;
+    color: #6d7884;
+}
+
+.secure-list {
+    display: grid;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.secure-item {
+    background: #f6f9fc;
+    padding: 18px;
+    border-radius: 12px;
+}
+
+.order-box {
+    padding: 28px;
+    background: #0b263e;
+    color: white;
+}
+
+.order-box h2 {
+    border-bottom: 1px solid #24455f;
+    padding-bottom: 17px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    color: #66d6ff;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 9px;
+    border: 1px solid #31536d;
+    background: #071c2f;
+    color: white;
+    outline: none;
+    font-size: 15px;
+}
+
+.form-control:focus {
+    border-color: #1bc7ff;
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.summary {
+    border-top: 1px solid #27475f;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    color: #c9d9e5;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.total span:last-child {
+    color: #22d2ff;
+}
+
+.submit-btn {
+    width: 100%;
+    border: 0;
+    margin-top: 22px;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #062032;
+    background: linear-gradient(90deg,#21c6ff,#39e3bd);
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    filter: brightness(1.08);
+}
+
+/* ===== Footer ===== */
+
+footer {
+    margin-top: 55px;
+    background: #07182a;
+    color: #c8d5e2;
+}
+
+.footer-inner {
+    max-width: 1400px;
+    margin: auto;
+    padding: 35px 30px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 35px;
+}
+
+.footer-inner h3,
+.footer-inner h4 {
+    color: white;
+}
+
+.footer-inner p {
+    font-size: 14px;
+    color: #91a5b7;
+    line-height: 1.8;
+}
+
+.copyright {
+    border-top: 1px solid #173149;
+    text-align: center;
+    padding: 18px;
+    font-size: 13px;
+}
+
+/* ===== 手機 ===== */
+
+@media(max-width:1000px) {
+
+    .products {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .features {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .checkout-area {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-right {
+        display: none;
+    }
+
+}
+
+@media(max-width:650px) {
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .search {
+        display: none;
+    }
+
+    .subnav-inner {
+        overflow-x: auto;
+        padding: 0 15px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .hero {
+        padding: 35px 25px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="topbar">
+
+    <div class="logo">
+        Tech<span>Store</span>
+    </div>
+
+    <div class="search">
+        <input type="text" placeholder="搜尋商品、品牌或關鍵字...">
+        <button type="button">⌕</button>
+    </div>
+
+    <div class="nav-right">
+        <span>👤 會員登入</span>
+        <span>♡ 我的最愛</span>
+        <span>🛒 購物車</span>
+    </div>
+
+</div>
+
+<div class="subnav">
+    <div class="subnav-inner">
+
+        <a href="#">🏠 首頁</a>
+        <a href="#products">💻 電腦週邊</a>
+        <a href="#products">📱 智慧科技</a>
+        <a href="#products">🎧 耳機音響</a>
+        <a href="#checkout">📦 我要訂購</a>
+        <a href="#" onclick="queryOrder(); return false;">🔍 訂單查詢</a>
+
+    </div>
+</div>
+
+</header>
+
+
+<main class="container">
+
+<!-- Banner -->
+
+<section class="hero">
+
+    <div class="hero-label">
+        TECHSTORE 2026
+    </div>
+
+    <h1>
+        科技，讓生活更簡單
+    </h1>
+
+    <p>
+        精選科技產品・快速出貨・安心購物<br>
+        找到最適合你的科技生活夥伴。
+    </p>
+
+    <a href="#products" class="hero-btn">
+        立即選購 →
+    </a>
+
+</section>
+
+
+<!-- 服務特色 -->
+
+<section class="features">
+
+    <div class="feature">
+        <div class="feature-icon">🚚</div>
+        <div>
+            <strong>快速出貨</strong>
+            <small>訂單成立後快速處理</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-icon">🛡️</div>
+        <div>
+            <strong>安心購物</strong>
+            <small>安全可靠的購物流程</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-icon">💳</div>
+        <div>
+            <strong>多元付款</strong>
+            <small>信用卡・轉帳・現金</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-icon">🎧</div>
+        <div>
+            <strong>客服支援</strong>
+            <small>提供完整售後服務</small>
+        </div>
+    </div>
+
+</section>
+
+
+<section id="products">
+
+<div class="section-title">
+
+    <div>
+        <h2>🔥 熱門商品</h2>
+        <span>精選科技好物</span>
+    </div>
+
+    <span>點選商品即可加入訂單</span>
+
+</div>
+
+
+<div class="products">
+
+<div class="product-card active"
+     onclick="chooseProduct('科技鍵盤',1290,this)">
+
+    <div class="tag">熱銷</div>
+
+    <div class="product-img">⌨️</div>
+
+    <h3>科技鍵盤</h3>
+
+    <div class="desc">
+        高效率辦公・舒適輸入
+    </div>
+
+    <div class="rating">
+        ★★★★★
+    </div>
+
+    <div class="price">
+        NT$ 1,290
+        <span class="stock">● 有庫存</span>
+    </div>
+
+</div>
+
+
+<div class="product-card"
+     onclick="chooseProduct('無線滑鼠',890,this)">
+
+    <div class="product-img">🖱️</div>
+
+    <h3>無線滑鼠</h3>
+
+    <div class="desc">
+        輕巧設計・無線自由
+    </div>
+
+    <div class="rating">
+        ★★★★★
+    </div>
+
+    <div class="price">
+        NT$ 890
+        <span class="stock">● 有庫存</span>
+    </div>
+
+</div>
+
+
+<div class="product-card"
+     onclick="chooseProduct('電競耳機',2990,this)">
+
+    <div class="tag">推薦</div>
+
+    <div class="product-img">🎧</div>
+
+    <h3>電競耳機</h3>
+
+    <div class="desc">
+        沉浸音效・遊戲利器
+    </div>
+
+    <div class="rating">
+        ★★★★★
+    </div>
+
+    <div class="price">
+        NT$ 2,990
+        <span class="stock">● 有庫存</span>
+    </div>
+
+</div>
+
+
+<div class="product-card"
+     onclick="chooseProduct('智慧螢幕',4990,this)">
+
+    <div class="product-img">🖥️</div>
+
+    <h3>智慧螢幕</h3>
+
+    <div class="desc">
+        高畫質顯示・工作娛樂
+    </div>
+
+    <div class="rating">
+        ★★★★★
+    </div>
+
+    <div class="price">
+        NT$ 4,990
+        <span class="stock">● 有庫存</span>
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- 結帳 -->
+
+<section class="checkout-area" id="checkout">
+
+<div class="checkout-info">
+
+    <h2>
+        🛒 安心購物
+    </h2>
+
+    <p>
+        選擇商品並填寫訂購資訊後，
+        系統會自動建立訂單並儲存至雲端資料庫。
+    </p>
+
+    <div class="secure-list">
+
+        <div class="secure-item">
+            🔐 <strong>安全資料處理</strong><br>
+            訂單透過 Java Servlet 處理並儲存。
+        </div>
+
+        <div class="secure-item">
+            ☁️ <strong>雲端訂單系統</strong><br>
+            訂單資料儲存於雲端 MySQL。
+        </div>
+
+        <div class="secure-item">
+            📦 <strong>快速建立訂單</strong><br>
+            系統會自動產生唯一訂單編號。
+        </div>
+
+    </div>
+
+</div>
+
+
+<form action="order"
+      method="post"
+      class="order-box">
+
+<h2>訂購資訊</h2>
+
+
+<input
+    type="hidden"
+    name="orderId"
+    value="AUTO">
+
+
+<div class="form-group">
+
+<label>
+    客戶姓名 *
+</label>
+
+<input
+    class="form-control"
+    type="text"
+    name="customer"
+    placeholder="請輸入您的姓名"
+    required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    商品
+</label>
+
+<select
+    class="form-control"
+    name="product"
+    id="productSelect"
+    onchange="selectChanged()">
+
+<option value="科技鍵盤">
+科技鍵盤 NT$1,290
+</option>
+
+<option value="無線滑鼠">
+無線滑鼠 NT$890
+</option>
+
+<option value="電競耳機">
+電競耳機 NT$2,990
+</option>
+
+<option value="智慧螢幕">
+智慧螢幕 NT$4,990
+</option>
+
+</select>
+
+</div>
+
+
+<div class="row">
+
+<div class="form-group">
+
+<label>
+數量
+</label>
+
+<input
+    class="form-control"
+    id="qty"
+    type="number"
+    name="qty"
+    value="1"
+    min="1"
+    onchange="updateTotal()"
+    oninput="updateTotal()">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+訂單狀態
+</label>
+
+<select
+    class="form-control"
+    name="status">
+
+<option value="處理中">
+處理中
+</option>
+
+<option value="已付款">
+已付款
+</option>
+
+<option value="已完成">
+已完成
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+付款方式
+</label>
+
+<select
+    class="form-control"
+    name="payment">
+
+<option value="信用卡">
+💳 信用卡
+</option>
+
+<option value="現金">
+💵 現金
+</option>
+
+<option value="銀行轉帳">
+🏦 銀行轉帳
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+備註
+</label>
+
+<textarea
+    class="form-control"
+    name="note"
+    placeholder="有任何需求可以寫在這裡..."></textarea>
+
+</div>
+
+
+<div class="summary">
+
+<div class="summary-row">
+<span>商品</span>
+<span id="summaryProduct">
+科技鍵盤
+</span>
+</div>
+
+<div class="summary-row">
+<span>單價</span>
+<span id="summaryPrice">
+NT$ 1,290
+</span>
+</div>
+
+<div class="summary-row">
+<span>數量</span>
+<span id="summaryQty">
+1
+</span>
+</div>
+
+
+<div class="total">
+
+<span>
+總金額
+</span>
+
+<span id="totalPrice">
+NT$ 1,290
+</span>
+
+</div>
+
+</div>
+
+
+<button
+    class="submit-btn"
+    type="submit">
+
+✓ 確認送出訂單
+
+</button>
+<button type="button"
+        class="submit-btn"
+        onclick="queryOrder()">
+    查詢訂單
+</button>
+</form>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<div class="footer-inner">
+
+<div>
+
+<h3>
+TechStore
+</h3>
+
+<p>
+科技改變生活，讓未來更近。<br>
+提供科技商品與線上訂單服務。
+</p>
+
+</div>
+
+
+<div>
+
+<h4>
+購物說明
+</h4>
+
+<p>
+付款方式<br>
+配送方式<br>
+退換貨政策
+</p>
+
+</div>
+
+
+<div>
+
+<h4>
+客戶服務
+</h4>
+
+<p>
+聯絡我們<br>
+常見問題<br>
+訂單查詢
+</p>
+
+</div>
+
+
+<div>
+
+<h4>
+關於我們
+</h4>
+
+<p>
+品牌故事<br>
+隱私權政策<br>
+服務條款
+</p>
+
+</div>
+
+</div>
+
+
+<div class="copyright">
+
+© 2026 TechStore. Java Web Order System.
+
+</div>
+
+</footer>
+
+
+<script>
+
+const prices = {
+    "科技鍵盤":1290,
+    "無線滑鼠":890,
+    "電競耳機":2990,
+    "智慧螢幕":4990
+};
+
+
+function chooseProduct(product,price,card){
+
+    document.getElementById("productSelect").value = product;
+
+    document.querySelectorAll(".product-card")
+        .forEach(c => c.classList.remove("active"));
+
+    card.classList.add("active");
+
+    updateTotal();
+
+    document.getElementById("checkout")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+
+function selectChanged(){
+
+    let product =
+        document.getElementById("productSelect").value;
+
+    document.querySelectorAll(".product-card")
+        .forEach(card => card.classList.remove("active"));
+
+    updateTotal();
+}
+
+
+function updateTotal(){
+
+    let product =
+        document.getElementById("productSelect").value;
+
+    let qty =
+        parseInt(document.getElementById("qty").value) || 1;
+
+    if(qty < 1){
+        qty = 1;
+    }
+
+    let price =
+        prices[product] || 0;
+
+    let total =
+        price * qty;
+
+
+    document.getElementById("summaryProduct")
+        .textContent = product;
+
+    document.getElementById("summaryPrice")
+        .textContent =
+        "NT$ " + price.toLocaleString();
+
+    document.getElementById("summaryQty")
+        .textContent = qty;
+
+    document.getElementById("totalPrice")
+        .textContent =
+        "NT$ " + total.toLocaleString();
+
+}
+function queryOrder() {
+    let orderId = prompt("請輸入訂單編號，例如：ORD-2026-021");
+
+    if (orderId == null) {
+        return;
+    }
+
+    orderId = orderId.trim();
+
+    if (orderId === "") {
+        alert("請輸入訂單編號");
+        return;
+    }
+
+    window.location.href =
+        "query-order?orderId=" + encodeURIComponent(orderId);
+}
+updateTotal();
+
+</script>
+
+</body>
+
+</html>
