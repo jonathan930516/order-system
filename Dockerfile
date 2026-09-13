@@ -10,7 +10,7 @@ RUN mkdir -p /usr/local/tomcat/webapps/ROOT && \
     jar -xf /tmp/orderservlet.war && \
     rm /tmp/orderservlet.war
 
-COPY p1_2..html /usr/local/tomcat/webapps/ROOT/p1_2..html
+COPY p1_2.html /usr/local/tomcat/webapps/ROOT/p1_2.html
 
 EXPOSE 8080
 
